@@ -1,0 +1,16 @@
+{
+  "name": "l6_proj_setup",
+  "version": "1.0.0",
+  "description": "a backend chai and code sanad",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "javascript",
+    "and",
+    "backend"
+  ],
+  "author": "saquib",
+  "license": "ISC"
+}
