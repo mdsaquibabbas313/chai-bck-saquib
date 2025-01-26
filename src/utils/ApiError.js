@@ -4,7 +4,7 @@ class ApiError extends Error {
         statusCode,
         // default in comma
         message = "Something went wrong",
-        error = [],
+        errors = [],
         stack = ""
     ){
         // for override we use super 
