@@ -1,0 +1,17 @@
+HTML form having following d=fields
+
+user name
+password
+radio buttons [specify NRI / INDIANS]
+Dropdown list
+submit & reset button
+
+
+
+q2) validate this form in following terms
+
+No text should be blank[use & pass]
+
+Password should not less than 8 characters
+
+Username can have only Alphabets

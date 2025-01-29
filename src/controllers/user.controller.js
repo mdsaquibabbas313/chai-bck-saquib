@@ -8,7 +8,7 @@ const registerUser = asyncHandler( async(req , res) => {
     // destructuring data from fronent in form type  
     // req.url is differnt when extraction from url
     const {fullName, email, username, password } = req.body
-     console.log("email: ", email);
+    //  console.log("email: ", email);
      console.log("Req.Body clg which comes from express" , req.body);
 
      if (
@@ -35,6 +35,16 @@ const registerUser = asyncHandler( async(req , res) => {
     if (req.files && Array.isArray(req.files.coverImage) && req.files.coverImage.length > 0) {
         coverImageLocalPath = req.files.coverImage[0].path
     }
+
+    // const mypdfLocalPath = req.files?.mypdf[0]?.path
+    // console.log('File path:', mypdfLocalPath);
+    // console.log('File path:', req.files);
+
+    // my practise _> multer & cloud upload 
+    // let mypdfLocalPath;
+    // if (req.files && Array.isArray(req.files.mypdf) && req.files.mypdf.length > 0) {
+    //     mypdfLocalPath = req.files.mypdf[0].path
+    // }
     
      if(!avatarLocalPath) {
         throw new ApiError(400 , "Avatar not Uploaded")
@@ -43,6 +53,7 @@ const registerUser = asyncHandler( async(req , res) => {
 
     const avatar = await uploadOnCloudinary(avatarLocalPath)
     const coverImage = await uploadOnCloudinary(coverImageLocalPath)
+    // const mypdf = await uploadOnCloudinary(mypdfLocalPath)
     
 
     if (!avatar) {
