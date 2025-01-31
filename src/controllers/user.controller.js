@@ -3,19 +3,20 @@ import {ApiError} from "../utils/ApiError.js"
 import {User} from "../models/user.model.js"
 import {uploadOnCloudinary} from "../utils/cloudinary.js"
 import {ApiResponse} from "../utils/ApiResponse.js"
+import jwt from "jsonwebtoken"
 
 // no asynchandler since its internal method not a web req or network db call
 const generateAccessAndRefreshToken = async(userId) => {
     try {
         // generation logic
-        const user = User.findById(userId)
-        const accessToken = user.generateAccessToken()
-        const refreshToken = user.generateRefreshToken()
+        const user = await User.findById(userId)
+        const accessToken =  user.generateAccessToken()
+        const refreshToken =  user.generateRefreshToken()
         // refresh is save in db also
         // adding value in object 
         user.refreshToken = refreshToken
         // jus save it dont validate
-        await user.save({validateBeforeSave : false})
+        await user.save({ validateBeforeSave: false })
 
         return {accessToken , refreshToken}
     } catch (error) {
@@ -152,11 +153,11 @@ const loginUser = asyncHandler( async(req , res) => {
     // send in cookie
 
     // since we have to send only user & token 
-    const loggedInUser = User.findById(user._id).select("-password -refreshToken")
+    const loggedInUser = await User.findById(user._id).select("-password -refreshToken")
 
     // COOKIE MODIFIED BY server only now
     const options = {
-        httpOnly : true,
+        httpOnly: true,
         secure : true
     }
 
@@ -173,11 +174,6 @@ const loginUser = asyncHandler( async(req , res) => {
             "User Logged In Successfully"
         )
     )
-
-
-
-
-
 
 })
 
